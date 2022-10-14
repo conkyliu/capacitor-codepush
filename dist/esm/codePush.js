@@ -337,6 +337,10 @@ class CodePush {
                 syncCallback && syncCallback(null, SyncStatus.UP_TO_DATE);
             }
             else {
+                if (syncOptions === null || syncOptions === void 0 ? void 0 : syncOptions.downloadURL) {
+                    console.log("syncOptions?.downloadURL 发现自定义下载地址 ", syncOptions === null || syncOptions === void 0 ? void 0 : syncOptions.downloadURL);
+                    remotePackage.downloadUrl = syncOptions.downloadURL;
+                }
                 if (remotePackage.failedInstall && syncOptions.ignoreFailedUpdates) {
                     CodePushUtil.logMessage("An update is available, but it is being ignored due to have been previously rolled back.");
                     syncCallback && syncCallback(null, SyncStatus.UPDATE_IGNORED);

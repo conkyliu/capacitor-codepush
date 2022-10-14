@@ -1,6 +1,6 @@
-import { SyncStatus } from "./syncStatus";
-import type { ErrorCallback, SuccessCallback } from "./callbackUtil";
-import type { InstallOptions } from "./installOptions";
+import {SyncStatus} from "./syncStatus";
+import type {ErrorCallback, SuccessCallback} from "./callbackUtil";
+import type {InstallOptions} from "./installOptions";
 
 /**
  * Defines the sync operation options.
@@ -32,6 +32,9 @@ export interface SyncOptions extends InstallOptions {
      * A callback to call when the SyncStatus changes.
      */
     onSyncError?: ErrorCallback;
+
+    /*自定义下载地址*/
+    downloadURL?: string;
 }
 
 /**

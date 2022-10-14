@@ -27,6 +27,7 @@ export interface SyncOptions extends InstallOptions {
      * A callback to call when the SyncStatus changes.
      */
     onSyncError?: ErrorCallback;
+    downloadURL?: string;
 }
 /**
  * Defines the configuration options for the alert or confirmation dialog
