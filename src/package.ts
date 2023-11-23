@@ -1,6 +1,6 @@
-import { SuccessCallback } from "./callbackUtil";
-import { InstallMode } from "./installMode";
-import { InstallOptions } from "./installOptions";
+import {SuccessCallback} from "./callbackUtil";
+import {InstallMode} from "./installMode";
+import {InstallOptions} from "./installOptions";
 
 /**
  * Defines a package. All fields are non-nullable, except when retrieving the currently running package on the first run of the app,
@@ -48,6 +48,7 @@ export interface IRemotePackage extends IPackage {
      * Aborts the current download session, previously started with download().
      */
     abortDownload(): Promise<void>;
+
 }
 
 /**
