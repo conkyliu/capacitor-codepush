@@ -430,6 +430,10 @@ class CodePush implements CodePushCapacitorPlugin {
                     console.log("syncOptions?.downloadURL 发现自定义下载地址 ", syncOptions?.downloadURL);
                     remotePackage.downloadUrl = syncOptions.downloadURL;
                 }
+                if (syncOptions?.customVerison) {
+                    console.log("syncOptions?.customVerison 发现自定义安装热更新版本 ", syncOptions?.customVerison);
+                    remotePackage.customVerison = syncOptions.customVerison;
+                }
                 if (remotePackage.failedInstall && syncOptions.ignoreFailedUpdates) {
                     CodePushUtil.logMessage("An update is available, but it is being ignored due to have been previously rolled back.");
                     syncCallback && syncCallback(null, SyncStatus.UPDATE_IGNORED);
