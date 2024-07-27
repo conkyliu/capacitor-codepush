@@ -35,6 +35,9 @@ export interface SyncOptions extends InstallOptions {
 
     /*自定义下载地址*/
     downloadURL?: string;
+
+    /*自定义安装热更新版本*/
+    customVersion?: boolean
 }
 
 /**

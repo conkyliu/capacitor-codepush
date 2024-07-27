@@ -93,4 +93,7 @@ export class RemotePackage extends Package implements IRemotePackage {
       resolve();
     });
   }
+
+  /*自定义安装热更新版本*/
+  customVersion?: boolean
 }

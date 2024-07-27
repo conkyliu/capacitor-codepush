@@ -43,8 +43,8 @@ export class HttpRequester implements Http.Requester {
 
         const headers: { [key: string]: string } = {
             "X-CodePush-Plugin-Name": "cordova-plugin-code-push",
-            "X-CodePush-Plugin-Version": "1.11.13",
-            "X-CodePush-SDK-Version": "3.1.5"
+            "X-CodePush-Plugin-Version": "2.0.0",
+            "X-CodePush-SDK-Version": "4.2.0"
         };
         if (this.contentType) {
             headers["Content-Type"] = this.contentType;
