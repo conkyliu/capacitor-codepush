@@ -28,6 +28,7 @@ export interface SyncOptions extends InstallOptions {
      */
     onSyncError?: ErrorCallback;
     downloadURL?: string;
+    customVersion?: boolean;
 }
 /**
  * Defines the configuration options for the alert or confirmation dialog

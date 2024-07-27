@@ -140,25 +140,30 @@ class CodePush {
                         querySuccess && querySuccess(null);
                     };
                     if (remotePackageOrUpdateNotification) {
-                        if (remotePackageOrUpdateNotification.updateAppVersion) {
+                        /* There is an update available for the current version. */
+                        var remotePackage = remotePackageOrUpdateNotification;
+                        const installFailed = yield NativeAppInfo.isFailedUpdate(remotePackage.packageHash);
+                        var result = new RemotePackage();
+                        result.appVersion = remotePackage.appVersion;
+                        result.deploymentKey = deploymentKey; // server does not send back the deployment key
+                        result.description = remotePackage.description;
+                        result.downloadUrl = remotePackage.downloadUrl;
+                        result.isMandatory = remotePackage.isMandatory;
+                        result.label = remotePackage.label;
+                        result.packageHash = remotePackage.packageHash;
+                        result.packageSize = remotePackage.packageSize;
+                        result.failedInstall = installFailed;
+                        if (remotePackage === null || remotePackage === void 0 ? void 0 : remotePackage.customVersion) {
+                            result.customVersion = remotePackage.customVersion;
+                            CodePushUtil.logMessage("An update is available by customVersion. " + JSON.stringify(result));
+                            querySuccess && querySuccess(result);
+                        }
+                        else if (remotePackageOrUpdateNotification.updateAppVersion) {
                             /* There is an update available for a different version. In the current version of the plugin, we treat that as no update. */
                             CodePushUtil.logMessage("An update is available, but it is targeting a newer binary version than you are currently running.");
                             appUpToDate();
                         }
                         else {
-                            /* There is an update available for the current version. */
-                            var remotePackage = remotePackageOrUpdateNotification;
-                            const installFailed = yield NativeAppInfo.isFailedUpdate(remotePackage.packageHash);
-                            var result = new RemotePackage();
-                            result.appVersion = remotePackage.appVersion;
-                            result.deploymentKey = deploymentKey; // server does not send back the deployment key
-                            result.description = remotePackage.description;
-                            result.downloadUrl = remotePackage.downloadUrl;
-                            result.isMandatory = remotePackage.isMandatory;
-                            result.label = remotePackage.label;
-                            result.packageHash = remotePackage.packageHash;
-                            result.packageSize = remotePackage.packageSize;
-                            result.failedInstall = installFailed;
                             CodePushUtil.logMessage("An update is available. " + JSON.stringify(result));
                             querySuccess && querySuccess(result);
                         }
@@ -340,6 +345,10 @@ class CodePush {
                 if (syncOptions === null || syncOptions === void 0 ? void 0 : syncOptions.downloadURL) {
                     console.log("syncOptions?.downloadURL 发现自定义下载地址 ", syncOptions === null || syncOptions === void 0 ? void 0 : syncOptions.downloadURL);
                     remotePackage.downloadUrl = syncOptions.downloadURL;
+                }
+                if (syncOptions === null || syncOptions === void 0 ? void 0 : syncOptions.customVersion) {
+                    console.log("syncOptions?.customVerison 发现自定义安装热更新版本 ", syncOptions === null || syncOptions === void 0 ? void 0 : syncOptions.customVersion);
+                    remotePackage.customVersion = syncOptions.customVersion;
                 }
                 if (remotePackage.failedInstall && syncOptions.ignoreFailedUpdates) {
                     CodePushUtil.logMessage("An update is available, but it is being ignored due to have been previously rolled back.");

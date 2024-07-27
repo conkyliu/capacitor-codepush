@@ -20,4 +20,5 @@ export declare class RemotePackage extends Package implements IRemotePackage {
      * Aborts the current download session, previously started with download().
      */
     abortDownload(): Promise<void>;
+    customVersion?: boolean;
 }
